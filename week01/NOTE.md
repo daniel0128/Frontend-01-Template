@@ -84,6 +84,6 @@
 
 #### 如何评判
 ## 前端训练营第二期 前端知识体系
-脑图在[这里](https://github.com/daniel0128/Frontend-01-Template/edit/master/week01/Front%20End%20Techonologis.md)
+脑图在[这里](https://github.com/daniel0128/Frontend-01-Template/blob/master/week01/Front%20End%20Techonologis.md)
 ## 前端训练营第三期  
 ... To Be Continued
