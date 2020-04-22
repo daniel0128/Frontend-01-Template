@@ -63,27 +63,3 @@ Array.prototype.toString = Uint8Array.prototype.toString = function() {
     this.forEach(v => arr.push(v.toString(16)));
     return '[' + arr.join(', ') +']';
 }
-
-// literals
-function combine(...args) {
-    return args.join('');
-}
-
-function atLeastOne(reg) {
-    return `(${reg})+`
-}
-
-function optional(reg) {
-    return `(${reg})?`
-}
-
-function or(...args) {
-    return `(${args.join('|')})`;
-}
-// number literal
-let numberLiteralRegex = / /;
-
-// string literal
-let stringLiteralRegex = / /;
-
-console.log(stringLiteralRegex.test(" "));
