@@ -29,6 +29,36 @@ function UTF8_Encoding(str) {
  * @returns {Array} 
  */
 function unicodeToUTF8(code) {
+    
+    if (code>=0 && code<=0x7f) {
+        return [code];
+    } else if (code <= 0x7ff) {
+        // xxx xx|xxxxxx
+        // 110xxxxx 10xxxxxx
+        return [
+            (code >> 6) | 0b11000000,
+            code & 0b111111 | 0b10000000
+        ];
+    } else if (code <= 0xffff) {
+        // xxxx|xxxx xx|xxxxxx
+        // 1110xxxx 10xxxxxx 10xxxxxx
+        return [
+            (code >> 12) | 0b11100000,
+            code >> 6 & 0b111111 | 0b10000000,
+            code & 0b111111 | 0b10000000
+        ];
+    } else if (code <= 0x10ffff) {
+        // xxx|xx xxxx|xxxx xx|xxxxxx
+        // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+        return [
+            code >> 18 | 0b11110000,
+            code >> 12 & 0b111111 | 0b10000000,
+            code >> 6 & 0b111111 | 0b10000000,
+            code & 0b111111 | 0b10000000,
+        ]
+    }
+}
+function unicodeToUTF8Old(code) {
     let utfArray = [];
     if (code >=0 && code <= 0x7f) {
         // if code is 7 bits long or shorter, directly push the code to array
