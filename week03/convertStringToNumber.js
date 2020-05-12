@@ -1,7 +1,7 @@
 function convertStringToNumber(string, radix = 10) {
     // const numberReg = /(0|[1-9][0-9]?\.([0-9]+)?([eE][\+-]?[0-9]+)?)|(\.[0-9]+([eE][\+-]?[0-9]+)?)|[1-9][0-9]*|0[bB][01]+|0[oO][0-7]+|0[xX][0-9a-fA-F]+/;
     // console.log(numberReg.test(string));
-    if (radix<2 || radix>36) return;
+    if (radix < 2 || radix > 36) return;
     // if(!numberReg.test(string)) return;
     const digitals = '0123456789abcdefghijklmnopqrstuvwxyz';
     let chars = string.split('');
@@ -30,7 +30,7 @@ function expect(string, number) {
     console.log(`${number} ${string === number ? '✅' : '❌'}`);
 }
 
-expect(convertStringToNumber('100', 2),4);
+expect(convertStringToNumber('100', 2), 4);
 expect(convertStringToNumber('ff', 16), 255);
 expect(convertStringToNumber('23'), 23);
 expect(convertStringToNumber('zz', 36), 1295);
