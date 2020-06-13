@@ -1,0 +1,142 @@
+<div id="board"></div>
+<style>
+    .cell {
+        width:100px;
+        height:100px;
+        background-color: green;
+        display:inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<script>
+    let pattern = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ];
+    let player = 1;
+
+    function show (pattern) {
+        let board = document.getElementById('board');
+        board.innerHTML = "";
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j< 3; j++) {
+                let cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.innerText = 
+                    pattern[i][j] == 2 ? '❌' :
+                    pattern[i][j] == 1 ? '⭕️' :
+                    '';
+                cell.addEventListener('click', () => userMove(j, i));
+                board.appendChild(cell);
+            }
+            board.appendChild(document.createElement('br'))
+        }
+    }
+
+    function move (x, y) {
+        pattern[y][x] = player;
+        player = 3 - player;
+    }
+
+    function willWin(pattern, player) {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (pattern[i][j] !== 0 ) {
+                    continue;
+                }
+                let tmp = clone(pattern);
+                tmp[i][j] = player;
+                if (check(tmp, player)) {
+                    return [j, i];
+                }
+            }
+        }
+        return null;
+    }
+
+    function userMove(x, y) {
+        if (pattern[y][x] !== 0) {
+            return;
+        }
+        pattern[y][x] = player;
+        show(pattern);
+        if (check(pattern, player)) {
+            alert(player === 2 ? "❌ is winner!" : "⭕️ is winner!")
+        }
+        player = 3 - player;
+        aiMove()
+    }
+
+    function aiMove() {
+        let move = bestChoice(pattern, player);
+        if (move.point) {
+            pattern[move.point[1]][move.point[0]] = player;
+        }
+        show(pattern);
+        if (check(pattern, player)) {
+            alert(player === 2 ? "❌ is winner!" : "⭕️ is winner!")
+        }
+        player = 3 - player;
+    }
+
+    function check(pattern, player) {
+        for (let i = 0; i<3; i++) {
+            if (pattern[i][0] === player && pattern[i][1] === player && pattern[i][2] === player) {
+                return true;
+            }
+            if (pattern[0][i] === player && pattern[1][i] === player && pattern[2][i] === player) {
+                return true;
+            }
+        }
+
+        if ((pattern[0][0] === player && pattern[1][1] === player && player === pattern[2][2]) || (pattern[0][2] === player&& pattern[1][1] === player && pattern[2][0] === player)) {
+            return true;
+        }
+        return false;
+    }
+
+    function clone(pattern) {
+        return JSON.parse(JSON.stringify(pattern));
+    }
+
+    function bestChoice (pattern, player) {
+        let point = willWin(pattern, player);
+        if (point) {
+            return {
+                point: point,
+                result: 1
+            }
+        }
+
+        let result = -1;
+
+        for(let i = 0; i< 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (pattern[i][j] !== 0) {
+                    continue;
+                }
+                let tmp = clone(pattern);
+                tmp[i][j] = player;
+                let opp  = bestChoice(tmp, 3 - player);
+
+                if ( - opp.result >=  result) {
+                    point = [j, i];
+                    result = - opp.result;
+                }
+            }
+        }
+
+        return {
+            point: point,
+            result: point ? result : 0
+        }
+    }
+    show(pattern);
+</script>
