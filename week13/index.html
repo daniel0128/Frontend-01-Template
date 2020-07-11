@@ -1,0 +1,26 @@
+<input id="r" type="range" min="0" max="255">
+<input id="g" type="range" min="0" max="255">
+<input id="b" type="range" min="0" max="255">
+<div id="color" style="width: 100px; height: 100px;"></div>
+<script src="proxy.js"></script>
+<script>
+    let p = reactive({r: 100, g: 100, b: 100});
+    effect(() => {
+        document.getElementById('r').value = p.r
+    })
+    document.getElementById('r').addEventListener("input", event => p.r = event.target.value)
+    
+    effect(() => {
+        document.getElementById('g').value = p.g
+    })
+    document.getElementById('g').addEventListener("input", event => p.g = event.target.value)
+
+    effect(() => {
+        document.getElementById('b').value = p.b
+    })
+    document.getElementById('b').addEventListener("input", event => p.b = event.target.value)
+
+    effect(() => {
+        document.getElementById('color').style.backgroundColor = `rgb(${p.r}, ${p.g}, ${p.b})`
+    })
+</script>
