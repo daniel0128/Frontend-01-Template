@@ -1,0 +1,28 @@
+<body>
+    <div id="myDiv" style="transform:translate(0,0); width: 100px; height: 100px; background-color: lightgreen"></div>
+</body>
+<!-- <script src="./gesture.js"></script> -->
+<script src="./gesture.temp.js"></script>
+<script>
+    window.addEventListener('contextmenu', event => event.preventDefault() );
+    document.addEventListener('touchmove', event => event.preventDefault(), {passive: false});
+    document.addEventListener('selectstart', event => event.preventDefault());
+
+    /*document.body.addEventListener('tap', event => {
+        console.log('tap!!!!!!!')
+    })*/
+
+    let x = 0, y = 0;
+
+    let myDiv = document.getElementById('myDiv');
+    enableGesture(myDiv);
+
+    myDiv.addEventListener('pan', event => {
+        myDiv.style.transform = `translate(${x + event.detail.clientX - event.detail.startX}px, ${y + event.detail.clientY - event.detail.startY}px)`;
+    });
+
+    myDiv.addEventListener('panend', event => {
+        x = x + event.detail.clientX - event.detail.startX;
+        y = y + event.detail.clientY - event.detail.startY;
+    });
+</script>
