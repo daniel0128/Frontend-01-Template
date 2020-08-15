@@ -11,7 +11,8 @@
     * source map
 
 ## Devtools
-### babel
+### build
+#### babel
 ```shell
 npm install -g @babel/core @babel/cli @babel/preset-env
 npm install --save-dev @babel/core @babel/cli @babel/preset-env
@@ -19,5 +20,18 @@ npm install --save-dev @babel/core @babel/cli @babel/preset-env
 * pure babel
 * webpack babel plugin
 * import @babel/core
-### vue compiler
-@vue/compiler-sfc  
+#### vue compiler
+@vue/compiler-sfc
+#### npm
+npm as a package
+### watch
+#### fsevents
+writen in C  
+### mock
+### http
+#### ws
+#### webpack-dev-server
+### debugger
+#### vscode
+#### devtool
+#### source map
