@@ -32,6 +32,10 @@ writen in C
 #### ws
 #### webpack-dev-server
 ### debugger
+* inspector V.S. debugger
+* node inspector API
+    * node runs web-socket listened by VSCode
+* [chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/1-3/Debugger/)
 #### vscode
 #### devtool
 #### source map
