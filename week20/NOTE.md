@@ -1,4 +1,4 @@
-# 每周总结可以写在这里
+# Weekly Summary for Week 20
 ## phantomjs
 headless browser
 ### Install
@@ -22,7 +22,7 @@ phantomjs hello.js
 
 ## OAuth
 Github OAuth as an example  
-### Register an App on github.com  
-### Add Codes for access_token
-### Add Codes for user_information
-### Integrate with Publisher
+1. Register an App on github.com  
+2. Add Codes for access_token
+3. Add Codes for user_information
+Integrate with Publisher  
